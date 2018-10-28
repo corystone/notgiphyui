@@ -8,11 +8,11 @@
   float:left;
   list-style: none;
   position: relative;
-  margin: 1em;
+  margin: .5em;
   padding: .5em;
 }
-.gifs br {
-  clear:both;
+.gifs li:nth-child(5n+1) {
+  clear:left;
 }
 .selected {
   background-color: #ccc !important;
