@@ -1,0 +1,19 @@
+.gifs {
+  margin: 0 0 0 0;
+}
+.gifs img {
+  display: block;
+}
+.gifs li {
+  float:left;
+  list-style: none;
+  position: relative;
+  margin: 1em;
+  padding: .5em;
+}
+.gifs br {
+  clear:both;
+}
+.selected {
+  background-color: #ccc !important;
+}
