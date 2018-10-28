@@ -1,3 +1,8 @@
+<div>
+    <input #searchbox type="search" (keydown.enter)="onSearch(searchbox.value)" >
+    <button (click)="onSearch(searchbox.value)">Search</button>
+</div>
+
 <div *ngIf="gifs">
 <h2>Results</h2>
 

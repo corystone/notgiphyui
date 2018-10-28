@@ -12,8 +12,8 @@ export class GifService {
 
   private endpoint = 'http://45.32.194.17:9999/';
 
-  getGifs(): Observable<Gif[]> {
-    const search = this.endpoint + '?q=cat';
+  getGifs(q: string): Observable<Gif[]> {
+    const search = this.endpoint + '?q=' + q;
     return this.http.get<Gif[]>(search).pipe(
       tap(gifs => this.log('fetched gifs')),
       catchError(this.handleError('getGifs', []))
@@ -26,7 +26,7 @@ export class GifService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`GifService: ${message}`);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

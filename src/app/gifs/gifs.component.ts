@@ -1,6 +1,7 @@
 import { GifService } from './../gif.service';
 import { Component, OnInit } from '@angular/core';
 import { Gif } from '../gif';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-gifs',
@@ -15,13 +16,19 @@ export class GifsComponent implements OnInit {
     this.selectedGif = gif;
   }
 
-  getGifs(): void {
-    this.gifService.getGifs().subscribe(gifs => this.gifs = gifs);
+  onSearch(q: string): void {
+    this.selectedGif = null;
+    this.getGifs(q);
   }
 
-  constructor(private gifService: GifService) {}
+  getGifs(q: string): void {
+    this.gifService.getGifs(q).subscribe(gifs => this.gifs = gifs);
+  }
+
+  constructor(
+    private gifService: GifService,
+    private messageService: MessageService) {}
 
   ngOnInit() {
-    this.getGifs();
   }
 }
