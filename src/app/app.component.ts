@@ -33,6 +33,9 @@ export class AppComponent implements OnInit {
     console.log('APP on init');
     // this.user = this.cookieService.get('current_user');
     this.authService.current_user.subscribe(user => {
+      // FIXME? Some strange lifecycle issues around this subscription.
+      // tslint:disable-next-line:max-line-length
+      // https://blog.angularindepth.com/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error-e3fd9ce7dbb4
       setTimeout(() => {
         this.user = user;
       });

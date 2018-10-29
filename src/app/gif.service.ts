@@ -14,7 +14,7 @@ export class GifService {
 
   getGif(id: string): Observable<Gif> {
     const url = this.endpoint + 'gif?id=' + id;
-    return this.http.get<Gif>(url).pipe(
+    return this.http.get<Gif>(url, {withCredentials: true}).pipe(
       tap(gif => this.log('fetched gif: ' + id)),
       catchError(this.handleError('getGif', null))
     );
