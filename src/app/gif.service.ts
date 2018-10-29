@@ -20,8 +20,11 @@ export class GifService {
     );
   }
 
-  getGifs(q: string): Observable<Gif[]> {
-    const search = this.endpoint + '?q=' + q;
+  getGifs(q: string, p: number): Observable<Gif[]> {
+    let search = this.endpoint + '?q=' + q;
+    if (p > 1) {
+      search = search + '&p=' + String(p);
+    }
     return this.http.get<Gif[]>(search).pipe(
       tap(gifs => this.log('fetched gifs')),
       catchError(this.handleError('getGifs', []))

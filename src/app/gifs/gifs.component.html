@@ -4,8 +4,16 @@
 </div>
 
 <div *ngIf="gifs">
-<h2>Results</h2>
+<h2>Results for {{ this.q }}</h2>
 
+<div *ngIf="prev">
+  <a [routerLink]="'/search/' + q + '/' + prev">Previous</a>
+</div>
+<div>
+  <a [routerLink]="'/search/' + q + '/' + next">Next</a>
+</div>
+
+<a routerLink="/search">Search</a>
 <ul class="gifs">
   <li *ngFor="let gif of gifs">
     <a routerLink="/detail/{{gif.id}}">

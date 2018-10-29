@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'detail/:id', component: GifDetailComponent },
   { path: 'search', component: GifsComponent },
+  { path: 'search/:query', component: GifsComponent },
+  { path: 'search/:query/:page', component: GifsComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: '', redirectTo: '/search', pathMatch: 'full' }
 ];

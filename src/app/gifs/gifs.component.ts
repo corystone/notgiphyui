@@ -1,7 +1,9 @@
 import { GifService } from './../gif.service';
 import { Component, OnInit } from '@angular/core';
 import { Gif } from '../gif';
-import { MessageService } from '../message.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-gifs',
@@ -10,19 +12,50 @@ import { MessageService } from '../message.service';
 })
 export class GifsComponent implements OnInit {
   gifs: Gif[];
+  q: string;
+  p: number;
+  prev: number;
+  next: number;
+  querySubscription: Subscription;
 
   onSearch(q: string): void {
-    this.getGifs(q);
+    if (!q) {
+      return;
+    }
+    this.router.navigateByUrl('/search/' + q);
   }
 
-  getGifs(q: string): void {
-    this.gifService.getGifs(q).subscribe(gifs => this.gifs = gifs);
+  getGifs(q: string, p: number): void {
+    this.gifService.getGifs(q, p).subscribe(gifs => this.gifs = gifs);
+  }
+
+  updatePagination() {
+    if (this.p < 1) {
+      this.p = 1;
+    }
+    this.next = this.p + 1;
+    this.prev = 0;
+    if (this.p > 1) {
+      this.prev = this.p - 1;
+    }
   }
 
   constructor(
-    private gifService: GifService,
-    private messageService: MessageService) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private gifService: GifService) {}
 
   ngOnInit() {
+    this.querySubscription = this.route.paramMap.subscribe(
+      (params: Params) => {
+        console.log(params);
+        this.q = params.get('query');
+        this.p = Number(params.get('page'));
+        this.updatePagination();
+        if (this.q) {
+          this.getGifs(this.q, this.p);
+        }
+      }
+    );
   }
 }
