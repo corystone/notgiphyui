@@ -11,13 +11,7 @@ import { MessageService } from '../message.service';
 export class GifsComponent implements OnInit {
   gifs: Gif[];
 
-  selectedGif: Gif;
-  onSelect(gif: Gif): void {
-    this.selectedGif = gif;
-  }
-
   onSearch(q: string): void {
-    this.selectedGif = null;
     this.getGifs(q);
   }
 

@@ -7,14 +7,12 @@
 <h2>Results</h2>
 
 <ul class="gifs">
-  <li *ngFor="let gif of gifs" (click)="onSelect(gif)"
-      [class.selected]="gif === selectedGif">
+  <li *ngFor="let gif of gifs">
+    <a routerLink="/detail/{{gif.id}}">
       <img src="{{gif.still_url}}" />
+    </a>
   </li>
 </ul>
 </div>
-<br/>
 
 <div style="clear:both"></div>
-
-<app-gif-detail [gif]="selectedGif"></app-gif-detail>

@@ -1,0 +1,22 @@
+<div *ngIf="current_user != ''">
+  Welcome {{current_user}}
+</div>
+
+<div *ngIf="current_user == ''">
+    <form #loginform="ngForm" (ngSubmit)="onSubmit(loginform)" >
+      <label for="userinput">Username</label>
+        <input name="userinput" required [(ngModel)]="user" class="form-control" #userinput="ngModel">
+        <div [hidden]="userinput.valid || userinput.pristine" class="alert alert-danger">
+          Name is required
+        </div>
+      <label for="passwordinput">Password</label>
+        <input type="password" name="passwordinput" required [(ngModel)]="password" class="form-control" #passwordinput="ngModel">
+        <div [hidden]="passwordinput.valid || passwordinput.pristine" class="alert alert-danger">
+          Password is required
+        </div>
+    <input type=submit [disabled]="!loginform.form.valid">
+  </form>
+  <p>
+    <a routerLink="/register">Register</a>
+  </p>
+</div>

@@ -12,6 +12,14 @@ export class GifService {
 
   private endpoint = 'http://45.32.194.17:9999/';
 
+  getGif(id: string): Observable<Gif> {
+    const url = this.endpoint + 'gif?id=' + id;
+    return this.http.get<Gif>(url).pipe(
+      tap(gif => this.log('fetched gif: ' + id)),
+      catchError(this.handleError('getGif', null))
+    );
+  }
+
   getGifs(q: string): Observable<Gif[]> {
     const search = this.endpoint + '?q=' + q;
     return this.http.get<Gif[]>(search).pipe(

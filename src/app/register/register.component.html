@@ -1,0 +1,20 @@
+<div>
+
+    <form #registerform="ngForm" (ngSubmit)="onSubmit(registerform)" >
+      <label for="userinput">Username</label>
+        <input name="userinput" required [(ngModel)]="user" class="form-control" #userinput="ngModel">
+        <div [hidden]="userinput.valid || userinput.pristine"
+     class="alert alert-danger">
+  Name is required
+</div>
+
+      <label for="passwordinput">Password</label>
+        <input type="password" name="passwordinput" required [(ngModel)]="password" class="form-control" #passwordinput="ngModel">
+        <div [hidden]="passwordinput.valid || passwordinput.pristine"
+     class="alert alert-danger">
+  Password is required
+</div>
+
+    <input type=submit [disabled]="!registerform.form.valid">
+  </form>
+</div>
