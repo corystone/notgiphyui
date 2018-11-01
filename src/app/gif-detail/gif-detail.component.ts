@@ -1,3 +1,5 @@
+import { FavoriteDetailComponent } from './../favorite-detail/favorite-detail.component';
+import { AuthService } from './../auth.service';
 import { GifService } from './../gif.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Gif } from '../gif';
@@ -11,18 +13,20 @@ import { Location } from '@angular/common';
   styleUrls: ['./gif-detail.component.css']
 })
 export class GifDetailComponent implements OnInit {
-
+  user = '';
   @Input() gif: Gif;
 
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private gifService: GifService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.getGif();
+    this.user = this.authService.getCurrentUser();
   }
 
   getGif(): void {

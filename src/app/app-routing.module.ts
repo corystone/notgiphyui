@@ -1,3 +1,4 @@
+import { TagsComponent } from './tags/tags.component';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'search/:query', component: GifsComponent },
   { path: 'search/:query/:page', component: GifsComponent },
   { path: 'favorites', component: FavoritesComponent },
+  { path: 'tags', component: TagsComponent },
   { path: '', redirectTo: '/search', pathMatch: 'full' }
 ];
 

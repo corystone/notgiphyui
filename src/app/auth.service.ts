@@ -8,12 +8,16 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://45.32.194.17:9999/auth';
+  private url = 'http://notgiphy.guitarzan.us:9999/auth';
   private _current_user_subject: BehaviorSubject<string>;
   private _current_user = '';
 
   get current_user() {
     return this._current_user_subject.asObservable();
+  }
+
+  getCurrentUser(): string {
+    return this._current_user;
   }
 
   setCurrentUser(user: string) {
@@ -46,7 +50,7 @@ export class AuthService {
       error => {
         this.setCurrentUser('');
       }
-  );
+    );
     return true;
   }
 

@@ -9,11 +9,10 @@
 <div *ngIf="prev">
   <a [routerLink]="'/search/' + q + '/' + prev">Previous</a>
 </div>
-<div>
+<div *ngIf="next">
   <a [routerLink]="'/search/' + q + '/' + next">Next</a>
 </div>
 
-<a routerLink="/search">Search</a>
 <ul class="gifs">
   <li *ngFor="let gif of gifs">
     <a routerLink="/detail/{{gif.id}}">

@@ -4,5 +4,7 @@
       <img src="{{gif.downsized_url}}"/>
     </div>
 </div>
+
+<app-favorite-detail *ngIf="user != ''" [gif]="gif"></app-favorite-detail>
 <button (click)="goBack()">go back</button>
 

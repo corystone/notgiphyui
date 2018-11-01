@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Gif } from './gif';
 import { MessageService } from './message.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -10,22 +10,53 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class GifService {
 
-  private endpoint = 'http://45.32.194.17:9999/';
+  private endpoint = 'http://notgiphy.guitarzan.us:9999/';
 
   getGif(id: string): Observable<Gif> {
-    const url = this.endpoint + 'gif?id=' + id;
-    return this.http.get<Gif>(url, {withCredentials: true}).pipe(
+    const url = this.endpoint + 'gifs';
+    const params = new HttpParams().set('id', id);
+
+    return this.http.get<Gif>(url, {params, withCredentials: true}).pipe(
       tap(gif => this.log('fetched gif: ' + id)),
       catchError(this.handleError('getGif', null))
     );
   }
 
+  addFavorite(favorite: Gif): Observable<any> {
+    const url = this.endpoint + 'favorites';
+    return this.http.post(url, favorite, {withCredentials: true});
+  }
+
+  getFavorite(favorite: string): Observable<Gif> {
+    const search = this.endpoint + 'favorites';
+    const params = new HttpParams();
+    params.set('favorite', favorite);
+
+    return this.http.get<Gif>(search, {withCredentials: true}).pipe(
+      tap(gifs => this.log('fetched favorites')),
+      catchError(this.handleError('getFavorites', null))
+    );
+
+  }
+
+  getFavorites(): Observable<Gif[]> {
+    const search = this.endpoint + 'favorites';
+
+    return this.http.get<Gif[]>(search, {withCredentials: true}).pipe(
+      tap(gifs => this.log('fetched favorites')),
+      catchError(this.handleError('getFavorites', []))
+    );
+  }
+
   getGifs(q: string, p: number): Observable<Gif[]> {
-    let search = this.endpoint + '?q=' + q;
+    const search = this.endpoint;
+    let params = new HttpParams().set('q', q);
     if (p > 1) {
-      search = search + '&p=' + String(p);
+      params = params.set('p', String(p));
     }
-    return this.http.get<Gif[]>(search).pipe(
+
+    console.log(params);
+    return this.http.get<Gif[]>(search, {params: params, withCredentials: true}).pipe(
       tap(gifs => this.log('fetched gifs')),
       catchError(this.handleError('getGifs', []))
     );

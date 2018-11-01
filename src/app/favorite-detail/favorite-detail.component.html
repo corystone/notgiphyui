@@ -1,0 +1,12 @@
+<div *ngIf="gif">
+  <button (click)="favorite(gif)">FAVORITE!</button>
+<p>
+  GIF: {{gif.id}}
+</p>
+<p>
+  EmbedURL: {{gif.embed_url}}
+</p>
+<p>
+  IS FAVORITE? {{isFavorite}}
+</p>
+</div>

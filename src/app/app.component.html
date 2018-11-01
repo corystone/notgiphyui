@@ -1,12 +1,15 @@
 <h1>{{ title }}</h1>
+
+<div class="welcome" *ngIf="user != ''">
+    Welcome, {{user}}! <a routerLink="/logout">Log Out</a>
+</div>
+
 <nav>
-    <a *ngIf="user == ''" routerLink="/login">Log In</a>
-    <div *ngIf="user != ''">
-        {{user}}
-        <a routerLink="/logout">Log Out</a>
-    </div>
-    <a routerLink="/search">Search</a>
-    <a routerLink="/favorites">Favorites</a>
+  <a *ngIf="user == ''" routerLink="/login">Log In</a>
+
+  <a routerLink="/search">Search</a>
+  <a routerLink="/favorites">Favorites</a>
+  <a routerLink="/tags">Tags</a>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
