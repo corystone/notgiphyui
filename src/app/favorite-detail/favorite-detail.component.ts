@@ -1,7 +1,6 @@
 import { GifService } from './../gif.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Gif } from '../gif';
-import { nextContext } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-favorite-detail',
@@ -43,9 +42,15 @@ export class FavoriteDetailComponent implements OnInit {
     });
   }
 
-  constructor(
-    private gifService: GifService
-  ) { }
+  unfavorite(gif: Gif) {
+    if (!gif) {
+      return;
+    }
+    console.log('FAVORITING ', gif.id);
+    this.gifService.removeFavorite(gif).subscribe(data => {
+      this.isFavorite = false;
+    });
+  }
 
   favorite(gif: Gif) {
     if (!gif) {
@@ -56,6 +61,10 @@ export class FavoriteDetailComponent implements OnInit {
       this.isFavorite = true;
     });
   }
+
+  constructor(
+    private gifService: GifService
+  ) { }
 
   ngOnInit() {
     console.log(this.gif);

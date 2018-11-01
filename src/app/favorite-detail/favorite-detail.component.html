@@ -1,12 +1,5 @@
 <div *ngIf="gif">
-  <button (click)="favorite(gif)">FAVORITE!</button>
-<p>
-  GIF: {{gif.id}}
-</p>
-<p>
-  EmbedURL: {{gif.embed_url}}
-</p>
-<p>
-  IS FAVORITE? {{isFavorite}}
-</p>
+  <button *ngIf="!isFavorite" (click)="favorite(gif)">FAVORITE!</button>
+  <button *ngIf="isFavorite" (click)="unfavorite(gif)">UNFAVORITE!</button>
 </div>
+<app-tags *ngIf="isFavorite" [gif]="gif"></app-tags>

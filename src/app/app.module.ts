@@ -37,6 +37,8 @@ import { FavoriteDetailComponent } from './favorite-detail/favorite-detail.compo
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  exports: [FavoriteDetailComponent]
+  exports: [
+    FavoriteDetailComponent,
+    TagsComponent]
 })
 export class AppModule { }

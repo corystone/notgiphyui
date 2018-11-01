@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Gif } from './gif';
+import { Tag } from './tag';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -16,35 +17,9 @@ export class GifService {
     const url = this.endpoint + 'gifs';
     const params = new HttpParams().set('id', id);
 
-    return this.http.get<Gif>(url, {params, withCredentials: true}).pipe(
+    return this.http.get<Gif>(url, {params: params, withCredentials: true}).pipe(
       tap(gif => this.log('fetched gif: ' + id)),
       catchError(this.handleError('getGif', null))
-    );
-  }
-
-  addFavorite(favorite: Gif): Observable<any> {
-    const url = this.endpoint + 'favorites';
-    return this.http.post(url, favorite, {withCredentials: true});
-  }
-
-  getFavorite(favorite: string): Observable<Gif> {
-    const search = this.endpoint + 'favorites';
-    const params = new HttpParams();
-    params.set('favorite', favorite);
-
-    return this.http.get<Gif>(search, {withCredentials: true}).pipe(
-      tap(gifs => this.log('fetched favorites')),
-      catchError(this.handleError('getFavorites', null))
-    );
-
-  }
-
-  getFavorites(): Observable<Gif[]> {
-    const search = this.endpoint + 'favorites';
-
-    return this.http.get<Gif[]>(search, {withCredentials: true}).pipe(
-      tap(gifs => this.log('fetched favorites')),
-      catchError(this.handleError('getFavorites', []))
     );
   }
 
@@ -62,11 +37,55 @@ export class GifService {
     );
   }
 
+  removeFavorite(favorite: Gif): Observable<any> {
+    const url = this.endpoint + 'favorites';
+    const params = new HttpParams().set('id', favorite.id);
+    return this.http.delete(url, {params: params, withCredentials: true});
+  }
+
+  addFavorite(favorite: Gif): Observable<any> {
+    const url = this.endpoint + 'favorites';
+    return this.http.post(url, favorite, {withCredentials: true});
+  }
+
+  getFavorite(favorite: string): Observable<Gif> {
+    const search = this.endpoint + 'favorites';
+    const params = new HttpParams().set('favorite', favorite);
+    return this.http.get<Gif>(search, {params: params, withCredentials: true}).pipe(
+      tap(gifs => this.log('fetched favorites')),
+      catchError(this.handleError('getFavorites', null))
+    );
+  }
+
+  getFavorites(): Observable<Gif[]> {
+    const search = this.endpoint + 'favorites';
+    return this.http.get<Gif[]>(search, {withCredentials: true}).pipe(
+      tap(gifs => this.log('fetched favorites')),
+      catchError(this.handleError('getFavorites', []))
+    );
+  }
+
+  addTag(tag: Tag): Observable<any> {
+    const url = this.endpoint + 'tags';
+    return this.http.post(url, tag, {withCredentials: true});
+  }
+
+  removeTag(tag: Tag): Observable<any> {
+    const url = this.endpoint + 'tags';
+    const params = new HttpParams().set('favorite', tag.favorite).set('tag', tag.tag);
+    return this.http.delete(url, {params: params, withCredentials: true});
+  }
+
+  getTags(favorite: string): Observable<Tag[]> {
+    const url = this.endpoint + 'tags';
+    const params = new HttpParams().set('favorite', favorite);
+    return this.http.get<Tag[]>(url, {params: params, withCredentials: true});
+  }
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`GifService: ${message}`);
   }

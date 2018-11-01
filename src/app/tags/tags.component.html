@@ -1,3 +1,10 @@
-<p>
-  tags works!
-</p>
+<h2>Tags:</h2>
+<ul class="tags">
+  <li
+   *ngFor="let tag of tags">{{ tag.tag }}<a (click)="removeTag(tag)">X</a></li>
+</ul>
+
+<form #newTagForm="ngForm" (ngSubmit)="addTag()" >
+  <input name="tagInput" #tagInput="ngModel" [(ngModel)]="newTag.tag">
+  <input type="submit" value="Add">
+</form>
