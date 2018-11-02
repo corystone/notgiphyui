@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Gif } from './gif';
 import { Tag } from './tag';
-import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -18,7 +17,6 @@ export class GifService {
     const params = new HttpParams().set('id', id);
 
     return this.http.get<Gif>(url, {params: params, withCredentials: true}).pipe(
-      tap(gif => this.log('fetched gif: ' + id)),
       catchError(this.handleError('getGif', null))
     );
   }
@@ -31,7 +29,6 @@ export class GifService {
     }
     console.log(params);
     return this.http.get<Gif[]>(url, {params: params, withCredentials: true}).pipe(
-      tap(gifs => this.log('fetched gifs')),
       catchError(this.handleError('getGifs', []))
     );
   }
@@ -59,7 +56,6 @@ export class GifService {
   getFavorites(): Observable<Gif[]> {
     const url = this.endpoint + 'favorites';
     return this.http.get<Gif[]>(url, {withCredentials: true}).pipe(
-      tap(gifs => this.log('fetched favorites')),
       catchError(this.handleError('getFavorites', []))
     );
   }
@@ -68,7 +64,6 @@ export class GifService {
     const url = this.endpoint + 'favorites';
     const params = new HttpParams().set('tag', tag);
     return this.http.get<Gif[]>(url, {params: params, withCredentials: true}).pipe(
-      tap(gifs => this.log('fetched favorites')),
       catchError(this.handleError('getFavorites', []))
     );
   }
@@ -97,20 +92,11 @@ export class GifService {
 
 
   constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
-
-  private log(message: string) {
-    this.messageService.add(`GifService: ${message}`);
-  }
+    private http: HttpClient) { }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
+      console.error(error);
       return of(result as T);
     };
   }

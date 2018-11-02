@@ -8,7 +8,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import { GifsComponent } from './gifs/gifs.component';
 import { GifDetailComponent } from './gif-detail/gif-detail.component';
-import { MessagesComponent } from './messages/messages.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -23,7 +22,6 @@ import { TagDetailComponent } from './tag-detail/tag-detail.component';
     AppComponent,
     GifsComponent,
     GifDetailComponent,
-    MessagesComponent,
     FavoritesComponent,
     LoginComponent,
     RegisterComponent,

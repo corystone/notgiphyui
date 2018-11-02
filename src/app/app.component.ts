@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('APP on init');
-    // this.user = this.cookieService.get('current_user');
     this.authService.current_user.subscribe(user => {
       // FIXME? Some strange lifecycle issues around this subscription.
       // tslint:disable-next-line:max-line-length
