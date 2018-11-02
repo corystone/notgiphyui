@@ -13,7 +13,7 @@ export class GifService {
   private endpoint = 'http://notgiphy.guitarzan.us:9999/';
 
   getGif(id: string): Observable<Gif> {
-    const url = this.endpoint + 'gifs';
+    const url = this.endpoint + 'api/gifs';
     const params = new HttpParams().set('id', id);
 
     return this.http.get<Gif>(url, {params: params, withCredentials: true}).pipe(
@@ -34,13 +34,13 @@ export class GifService {
   }
 
   removeFavorite(favorite: Gif): Observable<any> {
-    const url = this.endpoint + 'favorites';
+    const url = this.endpoint + 'api/favorites';
     const params = new HttpParams().set('id', favorite.id);
     return this.http.delete(url, {params: params, withCredentials: true});
   }
 
   addFavorite(favorite: Gif): Observable<any> {
-    const url = this.endpoint + 'favorites';
+    const url = this.endpoint + 'api/favorites';
     return this.http.post(url, favorite, {withCredentials: true});
   }
 
@@ -54,14 +54,14 @@ export class GifService {
   // }
 
   getFavorites(): Observable<Gif[]> {
-    const url = this.endpoint + 'favorites';
+    const url = this.endpoint + 'api/favorites';
     return this.http.get<Gif[]>(url, {withCredentials: true}).pipe(
       catchError(this.handleError('getFavorites', []))
     );
   }
 
   getFavoritesFromTag(tag: string): Observable<Gif[]> {
-    const url = this.endpoint + 'favorites';
+    const url = this.endpoint + 'api/favorites';
     const params = new HttpParams().set('tag', tag);
     return this.http.get<Gif[]>(url, {params: params, withCredentials: true}).pipe(
       catchError(this.handleError('getFavorites', []))
@@ -69,24 +69,24 @@ export class GifService {
   }
 
   addTag(tag: Tag): Observable<any> {
-    const url = this.endpoint + 'tags';
+    const url = this.endpoint + 'api/tags';
     return this.http.post(url, tag, {withCredentials: true});
   }
 
   removeTag(tag: Tag): Observable<any> {
-    const url = this.endpoint + 'tags';
+    const url = this.endpoint + 'api/tags';
     const params = new HttpParams().set('favorite', tag.favorite).set('tag', tag.tag);
     return this.http.delete(url, {params: params, withCredentials: true});
   }
 
   getTags(favorite: string): Observable<Tag[]> {
-    const url = this.endpoint + 'tags';
+    const url = this.endpoint + 'api/tags';
     const params = new HttpParams().set('favorite', favorite);
     return this.http.get<Tag[]>(url, {params: params, withCredentials: true});
   }
 
   getAllTags(): Observable<Tag[]> {
-    const url = this.endpoint + 'tags';
+    const url = this.endpoint + 'api/tags';
     return this.http.get<Tag[]>(url, {withCredentials: true});
   }
 

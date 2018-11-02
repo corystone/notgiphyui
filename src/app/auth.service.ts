@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://notgiphy.guitarzan.us:9999/auth';
+  private url = 'http://notgiphy.guitarzan.us:9999/api/auth';
   private _current_user_subject: BehaviorSubject<string>;
   private _current_user = '';
 
