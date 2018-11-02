@@ -1,7 +1,7 @@
 <div *ngIf="gif">
     <h2>{{gif.id | uppercase}}</h2>
     <div>
-      <img src="{{gif.downsized_url}}"/>
+      <a target="_blank" href="{{gif.url}}"><img src="{{gif.downsized_url}}"/></a>
     </div>
 </div>
 

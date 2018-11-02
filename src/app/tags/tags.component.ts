@@ -24,6 +24,7 @@ export class TagsComponent implements OnInit {
     this.gifService.addTag(this.newTag).subscribe(_ => {
       this.gifService.getTags(this.gif.id).subscribe( tags => this.tags = tags);
     });
+    this.newTag.tag = '';
   }
 
   removeTag(tag: Tag) {
