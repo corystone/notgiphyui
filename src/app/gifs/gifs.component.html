@@ -1,3 +1,5 @@
+<h2>Search</h2>
+
 <div>
     <input #searchbox type="search" (keydown.enter)="onSearch(searchbox.value)" >
     <button (click)="onSearch(searchbox.value)">Search</button>
@@ -6,12 +8,10 @@
 <div *ngIf="gifs">
 <h2>Results for {{ this.q }}</h2>
 
-<div *ngIf="prev">
-  <a [routerLink]="'/search/' + q + '/' + prev">Previous</a>
-</div>
-<div *ngIf="next">
-  <a [routerLink]="'/search/' + q + '/' + next">Next</a>
-</div>
+<ul class="pager">
+  <li *ngIf="prev"><a [routerLink]="'/search/' + q + '/' + prev">Previous</a></li>
+  <li *ngIf="next"><a [routerLink]="'/search/' + q + '/' + next">Next</a></li>
+</ul>
 
 <ul class="gifs">
   <li *ngFor="let gif of gifs">

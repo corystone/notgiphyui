@@ -1,4 +1,4 @@
-<h2>Tags:</h2>
-<ul class="tags">
+<h2>Tags</h2>
+<ul class="tags nav nav-pills">
   <li *ngFor="let tag of tags"><a [routerLink]="'/tags/' + encode(tag.tag)">{{ tag.tag }}</a></li>
 </ul>

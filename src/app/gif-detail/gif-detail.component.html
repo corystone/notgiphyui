@@ -1,12 +1,9 @@
 <div *ngIf="gif">
-    <h2>{{gif.id | uppercase}}</h2>
-    <div>
-      <a target="_blank" href="{{gif.url}}"><img src="{{gif.downsized_url}}"/></a>
-    </div>
+  <h2>{{gif.id}}</h2>
+  <div>
+    <a target="_blank" href="{{gif.url}}"><img src="{{gif.downsized_url}}"/></a>
+  </div>
 </div>
 
 <app-favorite-detail *ngIf="user != ''" [gif]="gif"></app-favorite-detail>
-<div>
-  <button (click)="goBack()">go back</button>
-</div>
 

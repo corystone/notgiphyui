@@ -46,7 +46,7 @@ export class FavoriteDetailComponent implements OnInit {
     if (!gif) {
       return;
     }
-    console.log('FAVORITING ', gif.id);
+    console.log('UNFAVORITING ', gif.id);
     this.gifService.removeFavorite(gif).subscribe(data => {
       this.isFavorite = false;
     });
@@ -54,6 +54,7 @@ export class FavoriteDetailComponent implements OnInit {
 
   favorite(gif: Gif) {
     if (!gif) {
+      console.log('unfavorite, no GIF!');
       return;
     }
     console.log('FAVORITING ', gif.id);

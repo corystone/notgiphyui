@@ -1,0 +1,16 @@
+.gifs {
+  margin: 0 0 0 0;
+}
+.gifs img {
+  display: block;
+}
+.gifs li {
+  float:left;
+  list-style: none;
+  position: relative;
+  margin: .5em;
+  padding: .5em;
+}
+.gifs li:nth-child(5n+1) {
+  clear:left;
+}

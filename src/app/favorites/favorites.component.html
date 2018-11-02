@@ -1,13 +1,13 @@
 <div *ngIf="gifs">
-    <h2>Favorites</h2>
+  <h2>Favorites</h2>
 
-    <ul class="gifs">
-      <li *ngFor="let gif of gifs">
-        <a routerLink="/detail/{{gif.id}}">
-          <img src="{{gif.still_url}}" />
-        </a>
-      </li>
-    </ul>
-    </div>
+  <ul class="gifs">
+    <li *ngFor="let gif of gifs">
+      <a routerLink="/detail/{{gif.id}}">
+        <img src="{{gif.still_url}}" />
+      </a>
+    </li>
+  </ul>
+</div>
 
-    <div style="clear:both"></div>
+<div style="clear:both"></div>

@@ -1,15 +1,22 @@
-<h1>{{ title }}</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">{{ title }}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/search">Search</a></li>
+      <li><a routerLink="/favorites">Favorites</a></li>
+      <li><a routerLink="/tags">Tags</a></li>
+    </ul>
 
-<div class="welcome" *ngIf="user != ''">
-    Welcome, {{user}}! <a routerLink="/logout">Log Out</a>
-</div>
-
-<nav>
-  <a *ngIf="user == ''" routerLink="/login">Log In</a>
-
-  <a routerLink="/search">Search</a>
-  <a routerLink="/favorites">Favorites</a>
-  <a routerLink="/tags">Tags</a>
+    <ul class="nav navbar-nav navbar-right">
+      <p *ngIf="user != ''" class="navbar-text">Welcome, {{ user }}</p>
+      <li><a *ngIf="user == ''" routerLink="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a *ngIf="user == ''" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      <li><a *ngIf="user != ''" routerLink="/logout"><span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+    </ul>
+  </div>
 </nav>
+
 <router-outlet></router-outlet>
 

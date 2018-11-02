@@ -1,13 +1,11 @@
 <div *ngIf="gifs">
-    <h2>Tag: {{ tag }}</h2>
+  <h2>Tag: {{ tag }}</h2>
 
-    <ul class="gifs">
-      <li *ngFor="let gif of gifs">
-        <a routerLink="/detail/{{gif.id}}">
-          <img src="{{gif.still_url}}" />
-        </a>
-      </li>
-    </ul>
-    </div>
-
-    <div style="clear:both"></div>
+  <ul class="gifs">
+    <li *ngFor="let gif of gifs">
+      <a routerLink="/detail/{{gif.id}}">
+        <img src="{{gif.still_url}}" />
+      </a>
+    </li>
+  </ul>
+</div>

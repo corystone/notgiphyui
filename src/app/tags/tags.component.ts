@@ -17,6 +17,10 @@ export class TagsComponent implements OnInit {
     private gifService: GifService
   ) { }
 
+  encode(s: string): string {
+    return encodeURIComponent(s);
+  }
+
   addTag() {
     const foo = 1;
     this.newTag.favorite = this.gif.id;
