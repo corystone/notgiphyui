@@ -24,14 +24,13 @@ export class GifService {
   }
 
   getGifs(q: string, p: number): Observable<Gif[]> {
-    const search = this.endpoint;
+    const url = this.endpoint;
     let params = new HttpParams().set('q', q);
     if (p > 1) {
       params = params.set('p', String(p));
     }
-
     console.log(params);
-    return this.http.get<Gif[]>(search, {params: params, withCredentials: true}).pipe(
+    return this.http.get<Gif[]>(url, {params: params, withCredentials: true}).pipe(
       tap(gifs => this.log('fetched gifs')),
       catchError(this.handleError('getGifs', []))
     );
@@ -48,18 +47,27 @@ export class GifService {
     return this.http.post(url, favorite, {withCredentials: true});
   }
 
-  getFavorite(favorite: string): Observable<Gif> {
-    const search = this.endpoint + 'favorites';
-    const params = new HttpParams().set('favorite', favorite);
-    return this.http.get<Gif>(search, {params: params, withCredentials: true}).pipe(
+  // getFavorite(favorite: string): Observable<Gif> {
+  //   const url = this.endpoint + 'favorites';
+  //   const params = new HttpParams().set('favorite', favorite);
+  //   return this.http.get<Gif>(url, {params: params, withCredentials: true}).pipe(
+  //     tap(gifs => this.log('fetched favorites')),
+  //     catchError(this.handleError('getFavorites', null))
+  //   );
+  // }
+
+  getFavorites(): Observable<Gif[]> {
+    const url = this.endpoint + 'favorites';
+    return this.http.get<Gif[]>(url, {withCredentials: true}).pipe(
       tap(gifs => this.log('fetched favorites')),
-      catchError(this.handleError('getFavorites', null))
+      catchError(this.handleError('getFavorites', []))
     );
   }
 
-  getFavorites(): Observable<Gif[]> {
-    const search = this.endpoint + 'favorites';
-    return this.http.get<Gif[]>(search, {withCredentials: true}).pipe(
+  getFavoritesFromTag(tag: string): Observable<Gif[]> {
+    const url = this.endpoint + 'favorites';
+    const params = new HttpParams().set('tag', tag);
+    return this.http.get<Gif[]>(url, {params: params, withCredentials: true}).pipe(
       tap(gifs => this.log('fetched favorites')),
       catchError(this.handleError('getFavorites', []))
     );
@@ -81,6 +89,12 @@ export class GifService {
     const params = new HttpParams().set('favorite', favorite);
     return this.http.get<Tag[]>(url, {params: params, withCredentials: true});
   }
+
+  getAllTags(): Observable<Tag[]> {
+    const url = this.endpoint + 'tags';
+    return this.http.get<Tag[]>(url, {withCredentials: true});
+  }
+
 
   constructor(
     private http: HttpClient,

@@ -15,6 +15,8 @@ import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { TagsComponent } from './tags/tags.component';
 import { FavoriteDetailComponent } from './favorite-detail/favorite-detail.component';
+import { TagListComponent } from './tag-list/tag-list.component';
+import { TagDetailComponent } from './tag-detail/tag-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FavoriteDetailComponent } from './favorite-detail/favorite-detail.compo
     RegisterComponent,
     LogoutComponent,
     TagsComponent,
-    FavoriteDetailComponent
+    FavoriteDetailComponent,
+    TagListComponent,
+    TagDetailComponent
   ],
   imports: [
     BrowserModule,

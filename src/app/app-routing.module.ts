@@ -1,5 +1,5 @@
-import { TagsComponent } from './tags/tags.component';
-import { AppComponent } from './app.component';
+import { TagDetailComponent } from './tag-detail/tag-detail.component';
+import { TagListComponent } from './tag-list/tag-list.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { GifDetailComponent } from './gif-detail/gif-detail.component';
@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'search/:query', component: GifsComponent },
   { path: 'search/:query/:page', component: GifsComponent },
   { path: 'favorites', component: FavoritesComponent },
-  { path: 'tags', component: TagsComponent },
+  { path: 'tags', component: TagListComponent },
+  { path: 'tags/:tag', component: TagDetailComponent },
   { path: '', redirectTo: '/search', pathMatch: 'full' }
 ];
 

@@ -1,0 +1,4 @@
+<h2>Tags:</h2>
+<ul class="tags">
+  <li *ngFor="let tag of tags"><a [routerLink]="'/tags/' + encode(tag.tag)">{{ tag.tag }}</a></li>
+</ul>
