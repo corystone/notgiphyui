@@ -23,12 +23,13 @@ export class AuthService {
   setCurrentUser(user: string) {
     console.log('auth service, setCurrentUser');
     this._current_user = user;
-    this.cookieService.set('current_user', user);
+    this.cookieService.set('current_user', user, undefined, '/');
     this._current_user_subject.next(user);
   }
 
   logout() {
-    this.cookieService.set('current_user', '');
+    this.cookieService.set('current_user', '', undefined, '/');
+    this.cookieService.set('sessionid', '', undefined, '/');
     this.setCurrentUser('');
   }
 
