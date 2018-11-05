@@ -9,7 +9,10 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GifService {
-
+  /* GifService handles all interaction with the api server aside from auth. */
+  /* Potential cleanup includes:
+   * extracting the endpoint into something configurable
+   * stronger error handling. */
   private endpoint = 'http://notgiphy.guitarzan.us:9999/';
 
   getGif(id: string): Observable<Gif> {
@@ -27,16 +30,9 @@ export class GifService {
     if (p > 1) {
       params = params.set('p', String(p));
     }
-    console.log(params);
     return this.http.get<Gif[]>(url, {params: params, withCredentials: true}).pipe(
       catchError(this.handleError('getGifs', []))
     );
-  }
-
-  removeFavorite(favorite: Gif): Observable<any> {
-    const url = this.endpoint + 'api/favorites';
-    const params = new HttpParams().set('id', favorite.id);
-    return this.http.delete(url, {params: params, withCredentials: true});
   }
 
   addFavorite(favorite: Gif): Observable<any> {
@@ -44,14 +40,11 @@ export class GifService {
     return this.http.post(url, favorite, {withCredentials: true});
   }
 
-  // getFavorite(favorite: string): Observable<Gif> {
-  //   const url = this.endpoint + 'favorites';
-  //   const params = new HttpParams().set('favorite', favorite);
-  //   return this.http.get<Gif>(url, {params: params, withCredentials: true}).pipe(
-  //     tap(gifs => this.log('fetched favorites')),
-  //     catchError(this.handleError('getFavorites', null))
-  //   );
-  // }
+  removeFavorite(favorite: Gif): Observable<any> {
+    const url = this.endpoint + 'api/favorites';
+    const params = new HttpParams().set('id', favorite.id);
+    return this.http.delete(url, {params: params, withCredentials: true});
+  }
 
   getFavorites(): Observable<Gif[]> {
     const url = this.endpoint + 'api/favorites';
@@ -90,12 +83,12 @@ export class GifService {
     return this.http.get<Tag[]>(url, {withCredentials: true});
   }
 
-
   constructor(
     private http: HttpClient) { }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      console.error(operation);
       console.error(error);
       return of(result as T);
     };

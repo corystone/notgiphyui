@@ -19,18 +19,7 @@ export class AppComponent implements OnInit {
     private cookieService: CookieService) {
     }
 
-  doLogout() {
-    this.authService.logout();
-    console.log('app component logging out');
-    this.router.navigateByUrl('/login');
-  }
-
-  updateUser(user) {
-    this.user = user;
-  }
-
   ngOnInit() {
-    console.log('APP on init');
     this.authService.current_user.subscribe(user => {
       // FIXME? Some strange lifecycle issues around this subscription.
       // tslint:disable-next-line:max-line-length
