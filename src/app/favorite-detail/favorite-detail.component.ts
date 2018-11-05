@@ -25,10 +25,7 @@ export class FavoriteDetailComponent implements OnInit {
       return;
     }
 
-    console.log(gif);
-    console.log(this.favorites);
     this.gifService.getFavorites().subscribe(favorites => {
-      console.log('got favorites', favorites);
       this.favorites = favorites;
       for (const f of favorites) {
         if (!f) {
@@ -46,7 +43,6 @@ export class FavoriteDetailComponent implements OnInit {
     if (!gif) {
       return;
     }
-    console.log('UNFAVORITING ', gif.id);
     this.gifService.removeFavorite(gif).subscribe(data => {
       this.isFavorite = false;
     });
@@ -54,10 +50,8 @@ export class FavoriteDetailComponent implements OnInit {
 
   favorite(gif: Gif) {
     if (!gif) {
-      console.log('unfavorite, no GIF!');
       return;
     }
-    console.log('FAVORITING ', gif.id);
     this.gifService.addFavorite(gif).subscribe(data => {
       this.isFavorite = true;
     });
@@ -67,8 +61,6 @@ export class FavoriteDetailComponent implements OnInit {
     private gifService: GifService
   ) { }
 
-  ngOnInit() {
-    console.log(this.gif);
-  }
+  ngOnInit() { }
 
 }

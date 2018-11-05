@@ -24,7 +24,6 @@ export class TagsComponent implements OnInit {
   addTag() {
     const foo = 1;
     this.newTag.favorite = this.gif.id;
-    console.log('New Tag:', this.newTag);
     this.gifService.addTag(this.newTag).subscribe(_ => {
       this.gifService.getTags(this.gif.id).subscribe( tags => this.tags = tags);
     });
@@ -32,7 +31,6 @@ export class TagsComponent implements OnInit {
   }
 
   removeTag(tag: Tag) {
-    console.log('Nuking tag:', tag);
     this.gifService.removeTag(tag).subscribe(_ => {
       this.gifService.getTags(this.gif.id).subscribe( tags => this.tags = tags);
     });
