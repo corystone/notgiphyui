@@ -1,6 +1,6 @@
-# notgiphyui
+# NotGiphyUI
 
-NotGiphyUI is an Angular frontend for [NotGiphy](https://github.com/ston9665/notgiphy). This is a project that lets you search Giphy for images, save your favorites, and add arbitrary tags to them. It is my first experience with the Angular framework.
+NotGiphyUI is an Angular frontend for [NotGiphy](https://github.com/corystone/notgiphy). This is a project that lets you search Giphy for images, save your favorites, and add arbitrary tags to them. It is my first experience with the Angular framework.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
 
